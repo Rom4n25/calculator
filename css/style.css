@@ -1,0 +1,14 @@
+body{
+    margin: 0;
+    background-color:grey;
+    height: 100vh;
+  }
+  
+  .result{
+   width: 300px;
+   background-color:white;
+   }
+
+  button{
+  background-color:green;
+  }
