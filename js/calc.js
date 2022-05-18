@@ -36,7 +36,7 @@ function assignNumbers(){
         num2=num2+this.textContent;
         resultBox.textContent = num2;
     }
-
+    this.classList.add("click");
 }
 
 function clear(){
@@ -48,6 +48,10 @@ function clear(){
     resultBox.textContent = 0;
 }
 
+function removeClickClass(){
+    this.classList.remove("click");
+}
+
 let num1 = "";
 let num2 = "";
 let result = "";
@@ -57,7 +61,10 @@ let previousOperator = "";
 let resultBox = document.querySelector(".result");
 
 let clearBtn = document.querySelector(".clear");
-clearBtn.addEventListener("click",clear);
+clearBtn.addEventListener("click",() => {
+    clear();
+    clearBtn.classList.add("click");
+});
 
 let numbers = document.querySelectorAll(".number");
 numbers.forEach((number) => number.addEventListener("click", assignNumbers));
@@ -84,4 +91,8 @@ operators.forEach((o) => o.addEventListener("click",() =>{
     }
 
     num1 = result;
+    o.classList.add("click");
 }));
+
+let buttons = document.querySelectorAll("button");
+buttons.forEach((btn) => btn.addEventListener("transitionend", removeClickClass));

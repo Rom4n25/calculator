@@ -86,4 +86,10 @@ button{
     border-width: 2px;
     background-color: rgba(255, 192, 203, 0.285);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.12s;
+}
+
+.click{
+    border-color: yellow;
+    transform: scale(1.08);
 }
