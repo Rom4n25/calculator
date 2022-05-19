@@ -19,80 +19,78 @@ function operate(operator,n1,n2){
     let numb2 = parseFloat(n2);
 
     switch(operator){
-        case "+" : return sum(numb1,numb2);
-        case "-" : return subtract(numb1,numb2);
-        case "*" : return multiply(numb1,numb2);
-        case "/" : return divide(numb1,numb2);
+        case "add" : return sum(numb1,numb2);
+        case "subtract" : return subtract(numb1,numb2);
+        case "multiply" : return multiply(numb1,numb2);
+        case "divide" : return divide(numb1,numb2);
     }
-
 }
 
-function assignNumbers(){
-
+function assignNumber(n){
+    
     if(operator==""){ 
-        num1=num1+this.textContent;
-        resultBox.textContent = num1;
+        if(n1.length>15) return;
+        n1=n1+n.textContent;
+        outputScreen.textContent = n1;
     }else{
-        num2=num2+this.textContent;
-        resultBox.textContent = num2;
+        if(n2.length>15) return;
+        n2=n2+n.textContent;
+        outputScreen.textContent = n2;
     }
-    this.classList.add("click");
 }
 
-function clear(){
-    num1 = "";
-    num2 = "";
+function clearScreen(){
+    n1 = "";
+    n2 = "";
     result = "";
     operator = "";
     previousOperator = "";
-    resultBox.textContent = 0;
+    outputScreen.textContent = 0;
 }
 
-function removeClickClass(){
-    this.classList.remove("click");
-}
-
-let num1 = "";
-let num2 = "";
-let result = "";
+let n1 = "";
+let n2 = "";
+let result = 0;
 let operator = "";
 let previousOperator = "";
 
-let resultBox = document.querySelector(".result");
+let outputScreen = document.querySelector(".result");
 
 let clearBtn = document.querySelector(".clear");
 clearBtn.addEventListener("click",() => {
-    clear();
+    clearScreen();
     clearBtn.classList.add("click");
 });
 
 let numbers = document.querySelectorAll(".number");
-numbers.forEach((number) => number.addEventListener("click", assignNumbers));
+numbers.forEach((n) => n.addEventListener("click", () => {
+    assignNumber(n);
+    n.classList.add("click");
+}));
 
 let operators = document.querySelectorAll(".operator");
-operators.forEach((o) => o.addEventListener("click",() =>{
+operators.forEach((o) => o.addEventListener("click",() => {
     previousOperator = operator;
-    operator = o.textContent;
-
-    if(operator=="="){
-  
-        result = operate(previousOperator,num1,num2);
-        num1 = result;
-        num2 = "";
-        resultBox.textContent = result;
-    }
-
-    if(num2==""){
-        result = num1;
-    }else{
-        result = operate(operator,num1,num2);
-        resultBox.textContent = result;
-        num2 = "";
-    }
-
-    num1 = result;
+    operator = o.id;
     o.classList.add("click");
+
+    if(operator == ""){
+        result = operate(previousOperator,n1,n2);
+        if(result % 1 != 0) result = result.toFixed(2);
+    }else if(n2 !=""){
+        result = operate(operator,n1,n2);
+    }else{
+        return;
+    }
+
+    outputScreen.textContent = result;
+    n1 = result;
+    n2 = "";
+  
 }));
 
 let buttons = document.querySelectorAll("button");
-buttons.forEach((btn) => btn.addEventListener("transitionend", removeClickClass));
+buttons.forEach((btn) => btn.addEventListener("transitionend", (event) => {
+
+    if(event.propertyName!="transform") return;
+    btn.classList.remove("click")}));
