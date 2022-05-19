@@ -31,7 +31,7 @@ function assignNumber(n){
     if(n1.length > 15 || n2.length > 15) return;
     if(n1.length == 0 && n.textContent == ".") return;
     if(n2.length == 0 && n.textContent == ".") return;
-    
+
     if(operator==""){ 
         if(n1.includes(".") && n.textContent == ".") return; 
         n1=n1+n.textContent;
@@ -52,7 +52,7 @@ function clearScreen(){
     outputScreen.textContent = 0;
 }
 
-function calculate(o){
+function assignVariables(o){
     previousOperator = operator;
     operator = o.id;
     
@@ -64,11 +64,11 @@ function calculate(o){
         result = operate(previousOperator,n1,n2);
         if(result % 1 != 0) result = result.toFixed(2);
         
+    }else if(n2 != ""){
+        result = operate(previousOperator,n1,n2);
     }else if(operator == "add" || operator == "divide" || operator == "sum" || operator == "subtract"){
         operator = "";
         return;
-    }else if(n2 != ""){
-        result = operate(operator,n1,n2);
     }else{
         return;
     }
@@ -100,7 +100,7 @@ numbers.forEach((n) => n.addEventListener("click", () => {
 
 let operators = document.querySelectorAll(".operator");
 operators.forEach((o) => o.addEventListener("click", () => {
-    calculate(o);
+    assignVariables(o);
     o.classList.add("click");
 }));
 
