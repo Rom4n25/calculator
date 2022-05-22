@@ -61,17 +61,19 @@ main{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.btnContainer{
+.btnContainer1{
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+    margin-right: 35px;
+}
+
+.btnContainer2{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
     margin-left: 35px;
     margin-right: 35px;
-}
-
-.clear{
-    margin-left: auto;
-    margin-right: 40px;
 }
 
 button{
@@ -86,7 +88,7 @@ button{
     border-width: 2px;
     background-color: rgba(255, 192, 203, 0.285);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    transition: all 0.12s;
+    transition: all 0.08s;
 }
 
 .click{
